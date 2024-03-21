@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<configuration>
+ 
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %m%n"/>
+        </Console>
+        <!-- 파일  -->
+        <RollingFile name ="RollingFile">
+            <FileName>C:/log/mylog.txt</FileName>
+            <FilePattern>C:/log/%d{yyyy-MM-dd-hh-mm}/mylog.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
+            </PatternLayout>
+   			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+        </RollingFile>
+    </Appenders>
+    
+    <loggers>
+        <root level="debug" additivity="true">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="RollingFile"/>
+        </root>
+        <Logger name="java.sqlonly" level="OFF" additivity="false">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="RollingFile"/>
+		</Logger>
+		<logger name="jdbc.resultset" level="OFF" additivity="false">
+			<appender-ref ref="console" />
+			<AppenderRef ref="RollingFile"/>
+		</logger>
+    </loggers>
+ 
+</configuration>
